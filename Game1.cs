@@ -20,10 +20,20 @@ namespace Topic_1___Recap_of_Monogame
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 500;
+            _graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
+            Window.Title = "Content, Scaling, and Text";
+            
+            shipRect = new Rectangle(10, 10, 75, 100);
+            backgroundRect = new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+
+
 
 
             base.Initialize();
@@ -32,8 +42,9 @@ namespace Topic_1___Recap_of_Monogame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            backgroundTexture = Content.Load<Texture2D>("Images/space_background");
+            shipTexture = Content.Load<Texture2D>("Images/enterprise_1");
 
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -41,7 +52,7 @@ namespace Topic_1___Recap_of_Monogame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+
 
             base.Update(gameTime);
         }
@@ -49,9 +60,10 @@ namespace Topic_1___Recap_of_Monogame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(backgroundTexture, backgroundRect, Color.White);
+            _spriteBatch.Draw(shipTexture, shipRect, Color.White);
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }
