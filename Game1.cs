@@ -15,6 +15,8 @@ namespace Topic_1___Recap_of_Monogame
         Texture2D shipTexture;
         Rectangle shipRect;
 
+        SpriteFont titleFont;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -44,7 +46,7 @@ namespace Topic_1___Recap_of_Monogame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundTexture = Content.Load<Texture2D>("Images/space_background");
             shipTexture = Content.Load<Texture2D>("Images/enterprise_1");
-
+            titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
         }
 
         protected override void Update(GameTime gameTime)
@@ -62,6 +64,7 @@ namespace Topic_1___Recap_of_Monogame
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundTexture, backgroundRect, Color.White);
+            _spriteBatch.DrawString(titleFont, "Space", new Vector2 (300, 10), Color.Yellow);
             _spriteBatch.Draw(shipTexture, shipRect, Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
